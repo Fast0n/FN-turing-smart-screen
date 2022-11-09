@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "turing-smart-screen-python"
+version = "0.1.0"
+description = ""
+authors = ["Massimiliano Montaleone <massimilianomontaleone@gmail.com>"]
+readme = "README.md"
+packages = [{include = "turing_smart_screen_python"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
