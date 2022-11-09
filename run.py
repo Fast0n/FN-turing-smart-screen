@@ -115,7 +115,7 @@ def main():
         draw.text((900, 970), avg,
                   fill=(colorA), anchor="md", font=font_username)
 
-        background.save(background)
+        background_image.save(background)
         im2 = Image.open('button.png')
         back_im = background_image.copy()
         back_im.paste(im2, (1215, 980))
