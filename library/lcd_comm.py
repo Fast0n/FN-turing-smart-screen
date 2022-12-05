@@ -58,20 +58,17 @@ class LcdComm(ABC):
         if self.com_port == 'AUTO':
             lcd_com_port = self.auto_detect_com_port()
             if not lcd_com_port:
-                logger.error(
-                    "Cannot find COM port automatically, please set it manually in config.yaml")
+                logger.error("Cannot find COM port automatically, please set it manually in config.yaml")
                 try:
                     sys.exit(0)
                 except:
                     os._exit(0)
             logger.debug(f"Auto detected COM port: {lcd_com_port}")
-            self.lcd_serial = serial.Serial(
-                lcd_com_port, 115200, timeout=1, rtscts=1)
+            self.lcd_serial = serial.Serial(lcd_com_port, 115200, timeout=1, rtscts=1)
         else:
             lcd_com_port = self.com_port
             logger.debug(f"Static COM port: {lcd_com_port}")
-            self.lcd_serial = serial.Serial(
-                lcd_com_port, 115200, timeout=1, rtscts=1)
+            self.lcd_serial = serial.Serial(lcd_com_port, 115200, timeout=1, rtscts=1)
 
     def closeSerial(self):
         try:
@@ -196,8 +193,7 @@ class LcdComm(ABC):
         d.text((x, y), text, font=font, fill=font_color)
 
         # Crop text bitmap to keep only the text (also crop if text overflows display)
-        left, top, text_width, text_height = d.textbbox(
-            (0, 0), text, font=font)
+        left, top, text_width, text_height = d.textbbox((0, 0), text, font=font)
         text_image = text_image.crop(box=(
             x, y,
             min(x + text_width, self.get_width()),
@@ -210,8 +206,7 @@ class LcdComm(ABC):
                            value: int = 50,
                            bar_color: Tuple[int, int, int] = (0, 0, 0),
                            bar_outline: bool = True,
-                           background_color: Tuple[int, int, int] = (
-                               255, 255, 255),
+                           background_color: Tuple[int, int, int] = (255, 255, 255),
                            background_image: str = None):
         # Generate a progress bar and display it
         # Provide the background image path to display progress bar with transparent background
@@ -248,12 +243,10 @@ class LcdComm(ABC):
         # Draw progress bar
         bar_filled_width = value / (max_value - min_value) * width
         draw = ImageDraw.Draw(bar_image)
-        draw.rectangle([0, 0, bar_filled_width - 1, height - 1],
-                       fill=bar_color, outline=bar_color)
+        draw.rectangle([0, 0, bar_filled_width - 1, height - 1], fill=bar_color, outline=bar_color)
 
         if bar_outline:
             # Draw outline
-            draw.rectangle([0, 0, width - 1, height - 1],
-                           fill=None, outline=bar_color)
+            draw.rectangle([0, 0, width - 1, height - 1], fill=None, outline=bar_color)
 
         self.DisplayPILImage(bar_image, x, y)

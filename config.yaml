@@ -1,4 +1,3 @@
----
 config:
   # Configuration values to set up basic communication
   # Set your COM port e.g. COM3 for Windows, /dev/ttyACM0 for Linux...
